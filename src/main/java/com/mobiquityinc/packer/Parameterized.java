@@ -2,6 +2,7 @@ package com.mobiquityinc.packer;
 
 import java.math.BigDecimal;
 import java.util.Comparator;
+import java.util.Objects;
 
 /**
  * Abstract superclass for types containing weight and cost parameters.
@@ -13,6 +14,7 @@ public abstract class Parameterized implements Comparable<Parameterized> {
             Comparator.comparing(Parameterized::getCost)
                     .reversed()
                     .thenComparing(Parameterized::getWeight);
+    private static final Comparator<BigDecimal> BIG_DECIMAL_COMPARATOR = Comparator.naturalOrder();
 
     private BigDecimal weight;
     private BigDecimal cost;
@@ -47,5 +49,19 @@ public abstract class Parameterized implements Comparable<Parameterized> {
     @Override
     public int compareTo(Parameterized o) {
         return COMPARATOR.compare(this, o);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Parameterized that = (Parameterized) o;
+        return BIG_DECIMAL_COMPARATOR.compare(weight, that.weight) == 0 &&
+                BIG_DECIMAL_COMPARATOR.compare(cost, that.cost) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(weight, cost);
     }
 }

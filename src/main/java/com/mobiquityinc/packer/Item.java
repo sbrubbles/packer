@@ -1,8 +1,6 @@
 package com.mobiquityinc.packer;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.Comparator;
 import java.util.Objects;
 
 /**
@@ -27,12 +25,14 @@ public class Item extends Parameterized {
 
     @Override
     public boolean equals(Object o) {
-        return o != null && getClass() == o.getClass() && index == ((Item) o).index;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass() || !super.equals(o)) return false;
+        return index == ((Item) o).index;
     }
 
     @Override
     public int hashCode() {
-        return index;
+        return Objects.hash(super.hashCode(), index);
     }
 
     @Override

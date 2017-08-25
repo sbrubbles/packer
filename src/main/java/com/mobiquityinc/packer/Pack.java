@@ -29,10 +29,23 @@ public class Pack extends Parameterized {
      * The list of items contained by the pack, being either result from the parsed input file or already distributed items representing
      * the solution. This property is immutable.
      *
-     * @return
+     * @return the list of items for this pack
      */
     public List<Item> getItems() {
         return items;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass() || !super.equals(o)) return false;
+        return Objects.equals(items, ((Pack) o).items);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), items);
     }
 
     @Override

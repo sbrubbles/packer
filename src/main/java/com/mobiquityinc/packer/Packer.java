@@ -39,7 +39,7 @@ public class Packer {
      * Accepts a file path as string and returns a string containing one line for each pack and each line containing the selected item's
      * indexes for that pack.
      *
-     * @param filePath the file path for the imput file
+     * @param filePath the file path for the input file
      * @return the list of resolutions for each of the packs
      */
     public static String pack(String filePath) {

@@ -1,18 +1,17 @@
-package com.mobiquityinc;
+package com.mobiquityinc.packer;
 
 import com.mobiquityinc.exception.APIException;
-import com.mobiquityinc.packer.APIPreconditions;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class APIPreconditionsTest {
+public class PackerPreconditionsTest {
     @Test
     public void testCheckConditionTrue() throws Exception {
         try {
-            APIPreconditions.checkCondition(true, "message");
+            PackerPreconditions.checkCondition(true, "message");
         } catch (Exception e) {
             Assert.fail();
         }
@@ -20,6 +19,6 @@ public class APIPreconditionsTest {
 
     @Test(expected = APIException.class)
     public void testCheckConditionFalse() throws Exception {
-        APIPreconditions.checkCondition(false, "message");
+        PackerPreconditions.checkCondition(false, "message");
     }
 }

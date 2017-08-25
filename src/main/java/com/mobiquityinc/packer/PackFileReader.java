@@ -5,13 +5,15 @@ import com.mobiquityinc.exception.APIException;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import static com.mobiquityinc.packer.APIPreconditions.checkCondition;
+import static com.mobiquityinc.packer.PackerPreconditions.checkCondition;
 
 /**
  * Class responsible for reading a file containing the string representation of packs of items and parsing them into a list of {@link Pack}.
@@ -61,7 +63,7 @@ public class PackFileReader {
         Pattern itemPattern = Pattern.compile("\\((\\d+),(\\d+(?:\\.\\d{1,2})?),\\D*(\\d+(?:\\.\\d{1,2})?)\\)");
         Matcher itemMatcher = itemPattern.matcher(strippedLine);
         while (itemMatcher.find()) {
-            int index = Integer.valueOf(itemMatcher.group(1));
+            int index = Integer.parseInt(itemMatcher.group(1));
             BigDecimal weight = new BigDecimal(itemMatcher.group(2));
             BigDecimal cost = new BigDecimal(itemMatcher.group(3));
             pack.getItems().add(new Item(index, weight, cost));
@@ -73,7 +75,7 @@ public class PackFileReader {
      * Validates a {@link File} object according to the following rules:
      * <ul>
      * <li>The file must exist in the filesystem</li>
-     * <li>The file must not represent a direcory</li>
+     * <li>The file must not represent a directory</li>
      * </ul>
      * <p>
      * If any of these rules is violated, the method will throw an {@link com.mobiquityinc.exception.APIException} with an appropriate
