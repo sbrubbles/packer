@@ -159,7 +159,7 @@ public class ItemTest {
     }
 
     /**
-     * Validates that two Items with the same weight and cost will be compared as ewquals
+     * Validates that two Items with the same weight and cost will be compared as equals
      *
      * @see Parameterized#compareTo(Parameterized)
      */

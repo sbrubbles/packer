@@ -123,7 +123,7 @@ public class PackProcessorTest {
      * @see PackProcessor#processFile(String)
      */
     @Test(expected = APIException.class)
-    public void testProcessFileValidatePackitemCount() {
+    public void testProcessFileValidatePackItemCount() {
         List<Pack> packs = Collections.singletonList(pack("1", "0"));
         IntStream.range(0, 16)
                 .forEach(i -> packs.get(0).addItem(item(i + 1, "1.00", "1")));
