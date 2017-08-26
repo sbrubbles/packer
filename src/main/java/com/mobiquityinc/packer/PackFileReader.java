@@ -1,12 +1,12 @@
 package com.mobiquityinc.packer;
 
 import com.mobiquityinc.exception.APIException;
+import com.mobiquityinc.model.Item;
+import com.mobiquityinc.model.Pack;
 
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -24,16 +24,13 @@ public class PackFileReader {
      * <p>
      * Each line of the file should represent one pack, and must follow the pattern:
      * <p>
-     * <code>
-     * [maximumWeight] : ([itemIndex],[itemWeight],[itemCost]) ([itemIndex],[itemWeight],[itemCost])...
-     * </code>
+     * {@code [maximumWeight] : ([itemIndex],[itemWeight],[itemCost]) ([itemIndex],[itemWeight],[itemCost])...}
      *
      * @param filePath the path to the file containing the packs' representations
      * @return a list of Pack
      */
     public List<Pack> readFile(String filePath) {
         File file = new File(filePath);
-        validateFile(file);
         try {
             return Files.readAllLines(file.toPath())
                     .stream()
@@ -69,23 +66,5 @@ public class PackFileReader {
             pack.getItems().add(new Item(index, weight, cost));
         }
         return pack;
-    }
-
-    /**
-     * Validates a {@link File} object according to the following rules:
-     * <ul>
-     * <li>The file must exist in the filesystem</li>
-     * <li>The file must not represent a directory</li>
-     * </ul>
-     * <p>
-     * If any of these rules is violated, the method will throw an {@link com.mobiquityinc.exception.APIException} with an appropriate
-     * error message.
-     *
-     * @param file the file to be validated
-     * @throws APIException in case any of the rules' constraints is not met.
-     */
-    private void validateFile(File file) {
-        checkCondition(file.exists(), "The file does not exist: %s", file.getAbsolutePath());
-        checkCondition(!file.isDirectory(), "The path should be a file: %s", file.getAbsolutePath());
     }
 }

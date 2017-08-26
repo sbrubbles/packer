@@ -1,5 +1,8 @@
 package com.mobiquityinc.packer;
 
+import com.mobiquityinc.model.Item;
+import com.mobiquityinc.model.Pack;
+
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.Comparator;
@@ -18,11 +21,7 @@ public class PackProcessor {
     private static final BigDecimal MAX_ITEM_WEIGHT = BigDecimal.valueOf(100);
     private static final BigDecimal MAX_ITEM_COST = BigDecimal.valueOf(100);
 
-    private final PackFileReader fileReader;
-
-    public PackProcessor() {
-        fileReader = new PackFileReader();
-    }
+    private PackFileReader fileReader = new PackFileReader();
 
     /**
      * This method accepts a file path, that will have each pf its lines parsed into a {@link Pack}, containing items that can be chosen

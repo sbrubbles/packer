@@ -1,7 +1,9 @@
-package com.mobiquityinc.packer;
+package com.mobiquityinc.model;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -10,6 +12,9 @@ import java.util.stream.Collectors;
 public class Pack extends Parameterized {
     private final List<Item> items = new ArrayList<>();
 
+    /**
+     * The default constructor of the class. Sets the {@code weight} and {@code cost} of the Pack to zero.
+     */
     public Pack() {
         super(BigDecimal.ZERO, BigDecimal.ZERO);
     }
@@ -38,9 +43,7 @@ public class Pack extends Parameterized {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass() || !super.equals(o)) return false;
-        return Objects.equals(items, ((Pack) o).items);
+        return super.equals(o) && Objects.equals(items, ((Pack) o).items);
     }
 
     @Override

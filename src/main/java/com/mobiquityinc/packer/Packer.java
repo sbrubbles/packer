@@ -14,6 +14,12 @@ public class Packer {
     private static final PackProcessor PACK_PROCESSOR = new PackProcessor();
 
     /**
+     * Private empty constructor to avoid instantiation
+     */
+    private Packer() {
+    }
+
+    /**
      * Main method of the application.
      * <p>
      * It will receive an array of arguments from the user for the application execution. Uses the first item from the arguments as the
@@ -28,7 +34,7 @@ public class Packer {
             LOGGER.log(Level.SEVERE, "You must provide a file path");
         } else {
             try {
-                System.out.println(pack(args[0]));
+                LOGGER.log(Level.INFO, pack(args[0]));
             } catch (APIException e) {
                 LOGGER.log(Level.SEVERE, e.getMessage(), e);
             }

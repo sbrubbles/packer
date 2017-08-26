@@ -1,4 +1,4 @@
-package com.mobiquityinc.packer;
+package com.mobiquityinc.model;
 
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -9,6 +9,13 @@ import java.util.Objects;
 public class Item extends Parameterized {
     private final int index;
 
+    /**
+     * Instantiates a new Item, setting the {@code index}, {@code weight} and {@code cost}.
+     *
+     * @param index  the index of the new instance
+     * @param weight the weight of the new instance
+     * @param cost   the cost of the new instance
+     */
     public Item(int index, BigDecimal weight, BigDecimal cost) {
         super(weight, cost);
         this.index = index;
@@ -25,18 +32,11 @@ public class Item extends Parameterized {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass() || !super.equals(o)) return false;
-        return index == ((Item) o).index;
+        return super.equals(o) && index == ((Item) o).index;
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), index);
-    }
-
-    @Override
-    public String toString() {
-        return String.format("Item{index=%d, weight=%s, cost=%s}", index, getWeight(), getCost());
     }
 }

@@ -1,4 +1,4 @@
-package com.mobiquityinc.packer;
+package com.mobiquityinc.model;
 
 import java.math.BigDecimal;
 import java.util.Comparator;
@@ -10,7 +10,7 @@ import java.util.Objects;
  * It also provides an implementation of {@link Comparable}, taking into account the highest cost, then the lowest weight.
  */
 public abstract class Parameterized implements Comparable<Parameterized> {
-    private final static Comparator<Parameterized> COMPARATOR =
+    private static final Comparator<Parameterized> COMPARATOR =
             Comparator.comparing(Parameterized::getCost)
                     .reversed()
                     .thenComparing(Parameterized::getWeight);
@@ -19,6 +19,12 @@ public abstract class Parameterized implements Comparable<Parameterized> {
     private BigDecimal weight;
     private BigDecimal cost;
 
+    /**
+     * Instantiates a new Parameterized by providing the {@code weight} and {@code cost} fields.
+     *
+     * @param weight the weight of the new instance
+     * @param cost   the cost of the new instance
+     */
     public Parameterized(BigDecimal weight, BigDecimal cost) {
         this.weight = weight;
         this.cost = cost;

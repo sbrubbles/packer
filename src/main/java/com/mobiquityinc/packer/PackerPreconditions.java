@@ -6,6 +6,10 @@ import com.mobiquityinc.exception.APIException;
  * Precondition implementation for simple condition checking, resulting in an {@link APIException} in case of false conditions.
  */
 public class PackerPreconditions {
+
+    /**
+     * Private empty constructor to avoid instantiations
+     */
     private PackerPreconditions() {
     }
 
